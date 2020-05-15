@@ -39,9 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # local
+    # app
     # todo why is the definition different
     'users.apps.UsersConfig',
+    'gettingStartedRestBasics',
 
     # restapi: serving the restapi
     'rest_framework',
@@ -66,11 +67,13 @@ MIDDLEWARE = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASS': [
+    'DEFAULT_AUTHENTICATION_CLASS': (        
         'rest_framework.authentication.TokenAuthentication',
-        # 'rest_framework.authentication.SessionAuthentication',
-        
-    ],
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
 }
 
 ROOT_URLCONF = 'userAuthTokenProject.urls'
